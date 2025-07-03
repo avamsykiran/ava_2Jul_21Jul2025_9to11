@@ -197,5 +197,181 @@ Java SE
 
                 }
             
-            
+            Control Structures
 
+                Decision Making / Branching Control Structures
+                    if
+                        Simple If:
+                            if(cond){
+                                //statements that execute only when the cond is true
+                            }
+
+                        If-Else:
+                            if(cond){
+                                //statements that execute only when the cond is true
+                            }else {
+                                //statements that execute only when the cond is false
+                            }
+
+                        If-Ladder:
+                            if(cond1){
+                                //statements that execute only when the cond1 is true
+                            }else if(cond2){
+                                //statements that execute only when the cond2 is true
+                            }else if(cond3){
+                                //statements that execute only when the cond3 is true
+                            }......
+                            ..else {
+                                //statements that execute only when all the given conds are false
+                            }
+
+                        Nested If:
+                            if inside another if
+
+                    switch
+                        switch(expr) {
+                            case value1: 
+                                //statements that execute when expr==value1
+                                break;
+                            case value2: 
+                                //statements that execute when expr==value2
+                                break;
+                            case value3: 
+                                //statements that execute when expr==value3
+                                break;
+                            ....
+                            ..
+                            default:                            
+                                //statements that execute when expr does not equals to any given value                                
+                        }
+
+                        switch supports expr that return either a char / int / string / enum
+
+                Loops / Iterative Control Structures
+
+                    do..while
+                        do {
+                            //these statements are executed surely once
+                            //the next iteration happens only whent the cond is true
+                            //this loop is called indefinite exit-check loop.
+                        }while(cond);
+
+                    while
+                        while(cond) {
+                            //these statements are execute repeatedly as long as the cond is true                         
+                            //this loop is called indefinite entry-check loop.
+                        }
+
+                    for
+                        for(initialization;cond;inc/dec){
+                            //these statements are execute repeatedly as long as the cond is true                         
+                            //this loop is called finite entry-check loop
+                        }
+
+                    enhanced-for / for-each :
+                        for(loopingVar : arrayOrListorSetorAnyOtherCollection) {
+
+                        }
+                
+                Non Conditional Control Structures
+
+                    break           used for premeture exit of a loop
+                    continue        used for cancelling the current iteration and skip to next iteration of a loop
+                    return          used to return a value from a method or even to exit from a method abruptly.
+
+            Arrays
+
+                an array is a homoginous lienar fixed-in-size collection of elements.
+
+                datatype[] arrName;                         //declaration
+                arrName = new datatype[size];               //instantiation
+
+                int[] nums;
+                nums = new int[10];
+                
+                datatype[] arrName = new datatype[size];    //declaration and instantiation
+                datatype arrName[] = new datatype[size];    //declaration and instantiation
+
+                String[] names = new String[10];
+                double data[] = new double[10];
+
+                datatype[] arrName = new datatype[]{vale1,val2,val3,...};   //initialization
+                datatype arrName[] = new datatype[]{vale1,val2,val3,...};   //initialization
+
+                String[] friends = new String[] {"Vamsy","Latha","Sita","Prem"};
+
+                1. index is zero-based
+                2. every array has 'length' property to find out the size of the array
+
+                for(int i=0;i<friends.length;i++){
+                    System.out.println(friends[i]);
+                }
+
+                for(String f : friends){
+                    System.out.println(f);
+                }
+
+                multi-dimenssioned array:
+
+                    int[][] matrix = new int[5][3];
+                    int[][][] array3d = new int[5][5][5];
+
+                jagged arrays:
+                    
+                    int[][] jagged = new int[4][];
+                    jagged[0] = new int[2];
+                    jagged[1] = new int[4];
+                    jagged[2] = new int[3];
+                    jagged[3] = new int[5];
+
+                    for(int r=0;r<jagged.length;r++){
+                        for(int c=0;c<jagged[r].length;c++){
+                            System.out.println(jagged[r][c]);
+                        }
+                    }
+
+        Object Oriented Programming
+
+            this is a coding concept that brough the real-time very near to the programming-world.
+
+            Class And Object
+            Encapsulation
+            Inheretence
+            Polymorphisim
+            Abstraction
+
+            Class
+                    is a user-defined data type to represent a real-time entity
+                    in terms of its properties and behaviours. Properties are 
+                    represented by variables called fields, behaviours are represented
+                    by functions called methods.
+
+                    class Student {
+                        int admNo;
+                        String fullName;
+                        int[] scores;
+
+                        int getTotal(){
+                            int total = 0;
+                            for(int score : scores){
+                                total += score;
+                            }
+                            return total;
+                        }
+                    }
+
+            Object
+                    is a variable of class-type.
+
+                    Student s;                  //declaration and is not allocted in the memory
+                    s = new Student();          //instantiation , here memory is allocated
+
+                    Student s2 = new Student();
+
+                    Student[] students = new Student[10];
+
+                    for(int i=0;i<students.length;i++){
+                        students[i] = new Student();
+                    }
+
+                    Java Objects are reference type.
