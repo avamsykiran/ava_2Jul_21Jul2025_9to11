@@ -375,3 +375,277 @@ Java SE
                     }
 
                     Java Objects are reference type.
+
+                    Constructor
+
+                        is a method of a class that gets invoked immidiately
+                        after the memory allocation of an object.
+
+                        Constructors are mostly used for initialization of fields of a class.
+
+                        1. Constructors must have the same name as that of a class
+                        2. Constructors should not return any value.
+
+                        class Student {
+                            int admNo;              //defaults to 0 being an int
+                            String fullName;        //defaults to null being an object of String class
+                            int[] scores;           //defaults to null as arrays are also objects
+
+                            Student(){
+                                scores = new int[4];    //initializing the array to accomidate 4 ints.
+                            }
+
+                            int getTotal(){
+                                int total = 0;
+                                for(int score : scores){
+                                    total += score;
+                                }
+                                return total;
+                            }
+                        }
+                        
+                        1. If a class is not written with any constructor , java compiler adds a default-constructor to it.
+                        2. A class can have any number of constructors as long as they havce different parameters.
+                        3. A constructor having no parameters is called a default-constructor.
+                        4. A constructor having atleast one parameter is called a paramatrized constructor.
+                        5. If atleast one of the parameters of a parametrized-constructor is an object of the same class,
+                            then it is called a copy-constructor
+
+            Encapsulation
+
+                is also called data-hiding.
+
+                is the way of providing an indirect access to the fields and a few methods of a class.
+
+                encapsulation in java is implemented with the help of access specifiers and setters / getters.
+
+                access-specifiers
+
+                    default         if a field or method is not given any of the keywords like
+                                    public / private / protected, then it is said to have default access
+                                    specifier. Fields and mehtods with default access specifier are accessable
+                                    within the host-class and within any other class that belongs to
+                                    the package of the host-class 
+
+                    public          Fields and methods that are marked with public access specifier are accessable
+                                    any where through out the application.
+
+                    protected       Fields and methods that are marked with protected access specifier are accessable
+                                    within the host-class and within the sub-classes of the host-class.
+
+                    private         Fields and methods that are marked with priovate access specifier are accessable
+                                    only within the host-class.
+
+                setter      is a method that can accept and assign a value into a field
+
+                getter      is a method that returns a value of a field
+
+                    if a field is marked private and has
+                    no-setter and no-getter         then it is an in-accessable field
+                    only setter                        then it is a write-only field
+                    only getter                        then it is a read-only field
+                    both setter and getter          then it is a fully accessable field
+
+                    class Circle {
+                        private double radius;
+
+                        public void setRadius(int radius){
+                            this.radius=radius;
+                        }
+
+                        public double getRadius(){
+                            return this.radius;
+                        }
+
+                        public double getDiameter(){
+                            return this.radius*2;
+                        }
+                    }
+
+                    Circle c1 = new Circle();
+
+                    c1.setRadius(90.9);
+                    System.out.println(c1.getRadius());
+                    System.out.println(c1.getDiameter());
+
+                    Circle c2 = new Circle();
+
+                    c2.setRadius(9.9);
+                    System.out.println(c2.getRadius());
+                    System.out.println(c2.getDiameter());
+                   
+                this keyword        refers to the object that is accessing a method.
+                                    'this' can also be used to invoke one constructor 
+                                    from another of the same class.
+
+                static keyword      static can be applied on 
+                                    a field         static fields are also called class variables because
+                                                    every object of the class shares the same copy of these
+                                                    fields
+
+                                                    non-static fields are also called instance variables, as
+                                                    each object of class is allocated its
+                                                    own copy of these fields
+
+                                    a method        a static method can access only other static fields.
+                                                    a static method is never associated with an object but
+                                                    is invoked associating it with the class name.
+
+                                    a class         a static class can be created only inside another class.
+
+                                                    a class inside another class is called
+                                                        Inner Class     are non-static
+                                                                        these have access to all fields
+                                                                        and methods of the outer class
+
+                                                        Nested Class    are static 
+                                                                        do not have access to non-static members 
+                                                                        of the out class
+
+                                    static blocks    
+
+                                                    static {
+                                                        //the code written here is executed jsut before the class
+                                                        //is accessed for the first time.
+                                                    }
+
+            Inheretence
+
+                is about creating a class class from an exiting clasx.
+
+                class Pen {
+                    Nib nib;
+                    Barrel barrel;
+                    Refill refill;
+
+                    void write(Paper paper,String text) {
+
+                    }
+                }
+
+                class Marker extends Pen {
+                    void write(WhiteBoard board,String text) {
+
+                    }
+                }
+
+                We are deriving MArker from Pen, and in this case Pen is called super-class
+                and the Marker is the sub-class.
+
+                Objects of super class will be allocated with all the fields in the super class.
+                Objects of sub class will be allocated with all the fields in super and sub classes.
+
+                Simple Inheretence / Single Inheretence
+
+                    Employee (empId,fullName,sal)   <------------ Manager (..,allowence)
+
+                Multi-level Inheretence
+                    
+                    Employee (empId,fullName,sal)   <--- Manager (..,allowence) <--- Director (..,share)
+
+                Hirarchial Inheretence
+
+                    Employee (empId,fullName,sal)   
+                        |
+                        |<------------ ContractEmployee (..,contractDuration)
+                        |
+                        |<------------ Manager (..,allowence)
+
+                Hybrid Inheretence
+
+                    Employee (empId,fullName,sal)   
+                        |
+                        |<------------ ContractEmployee (..,contractDuration)
+                        |
+                        |<------------ Manager (..,allowence)
+                                        |
+                                        |<---- Director (..,share)
+
+                Multiple Inheretence
+
+                    is where two or more super-types commonly are derived into one sub-type
+                    java classes do not support multiple inheeretence due to ambiguity issues.
+
+                Points to rememebr
+                    
+                    1. When ever an object of a sub-class is allocated, the construcotrs of all the super classes are
+                        invoked from top to bottom.
+
+                        for instance, in the above hybrid ionheretenc,
+                            crewating an object to Direcotr will invoke constructors of 
+                                Employee(), Manager() , Director()
+
+                    2. A reference of a super type can refer to an object of its sub-type
+
+                        Employee e1 = new ContractEmployee();
+                        Employee e2 = new Manager();
+                        Employee e3 = new Director();
+
+                        Manager m1 = new Director();
+
+                    4. Object type cassting
+
+                        ContactEmployee c1 = (ContractEmployee) e1;
+                        ContactEmployee c2 = (ContractEmployee) e2; //raises a ClassCastException as e2 is a Manager
+
+            Polymorphisism
+
+                is where we can define more than one method in the same scope with the same name.
+
+                Overloading 
+                    two methods are said to be overlaoded if
+                            (a) both of them belong to the same class or to a super and a sub class
+                        and (b) both of them have same name
+                        and (c) they have different number of parameters or different types of parameters
+
+                    class HumanBeing {
+                        void eat(Fruit fruit) {
+                            wash(fruit);
+                            peel(fruit);
+                            Piece ps[] = cut(fruit);
+                            for(Piece p : ps){
+                                chewAndSwallow(p);
+                            }
+                        }
+
+                        void eat(IceCream iceCream){
+                            while(iceCream.exists()) {
+                                lickAndSwallow(iceCream);
+                            }
+                        }
+                    }
+
+                Overriding
+                    two methods are said to be overriden if
+                            (a) both of them belong to a super and a sub class
+                        and (b) both of them have same name, same number of parameters and same type of parameters
+                        
+                    class Monkey {
+                        void eat(IceCream iceCream){
+                            while(iceCream.exists()) {
+                                lickAndSwallow(iceCream);
+                            }
+                        }
+
+                        void eat(Fruit fruit) {
+                            while(fruit.exists(){
+                                byteAndChewAndSwallow(p);
+                            }
+                        }
+                    }
+
+                    class HumanBeing extends Monkey {
+                        void eat(Fruit fruit) {     //overloades Monkey::eat(IceCream) and overrides Monkey:eat(Fruit)
+                            wash(fruit);
+                            peel(fruit);
+                            Piece ps[] = cut(fruit);
+                            for(Piece p : ps){
+                                chewAndSwallow(p);
+                            }
+                        }
+                    }
+
+            Abstraction
+
+                
+
