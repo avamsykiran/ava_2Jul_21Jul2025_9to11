@@ -647,5 +647,223 @@ Java SE
 
             Abstraction
 
-                
+                is also called behaviour hiding.
+
+                is a practise of declaring an method and implementing it at a later stage.
+
+                (a) abstract class
+                        if a class is marked abstract we can not create objects to that class.
+
+                        Let's conseder a school automation app:
+
+                            abstract class Person       id,name,dob,bloodGroup,gender,height
+                                |<-- Student                 .., clazz,section,
+                                |<-- Teacher                 .., subject, salary
+                                |<-- NonTeachingStaff        .., designation, salary   
+                                |<-- Principal              
+                                |<-- Parent
+
+                (b) abstract function
+                        If a function can not be implemented right away then it is marked as abstract.
+                        
+                        Only abstract classes and interface can accomidate abstract functions.
+
+                        Any sub class deriving an abstract class or an interface must implement all abstract
+                        methods in them, orelse the sub class is also to be marked as abstract.
+
+                        abstract class GeometricShape {                            
+                            protected int[] sides;
+
+                            public int getPerimeter(){
+                                int p = 0;
+                                for(int s : sides){
+                                    p +=s;
+                                }
+                                return p;
+                            }
+
+                            public abstract double getArea();
+                        }
+
+                        class Rectangle extends GeometricShape {
+                            public Rectangle(){
+                                this.sides = new int[4];
+                            }
+
+                            public double getArea(){
+                                return sides[0]*sides[1];
+                            }
+                        }
+
+                        class Circle extends GeometricShape {
+                            public Circle(){
+                                this.sides = new int[1];
+                            }
+
+                            public double getArea(){
+                                return 3.14*sides[0]*sides[0];
+                            }
+                        }
+
+                (c) interfaces
+                    are user defiend data type that do not have fields and support multiple inheretence.
+
+                        interface GeometricShape {                                                        
+                            int getPerimeter();
+                            double getArea();
+
+                            public default double estimatePaintingCost(double paintingRate){
+                                return getArea() * paintingRate;
+                            }
+                        }
+
+                        class Rectangle implements GeometricShape {
+                            private int length;
+                            private int breadth;                           
+
+                            public double getPerimeter(){
+                                return 2*(length+breadth);
+                            }
+
+                            public double getArea(){
+                                return length*breadth;
+                            }
+                        }
+
+                        class Circle implements GeometricShape {
+                            private double radius;
+                            
+                            public double getPerimeter(){
+                                return 2*3.14*radius;
+                            }
+
+                            public double getArea(){
+                                return 3.14*radius*radius;
+                            }
+                        }
+
+                'final'
+
+                        is used on 
+                            a variable      to make that variable a constant.
+                            a method        to make that method non-overridable.
+                            a class         to make that class non-inheretable.
+
+                the final and abstract keywords can not be used at a time, as they are contradictory.
+
+
+        Java Packages And Modules
+        -----------------------------
+
+            package is a collection of classes, interfaces, enums, annotations and sub-packages.
+
+                in java, packages are used to represent different layers of an application.
+
+                    Repositories / DAOs
+                    Services
+                    UserInterfaces
+                    Library
+                    Utility
+
+            modules , was introduced from java 9, is a collection of packages. A module is described
+            by a module descriptor file that names the module and gives th lsit of exposed packages
+            and also gives the lsit of outside packages that are required by the current module.
+
+        Nava Built-in Packages
+        ---------------------------------
+
+            java.lang       is said to be implicit package as it need not be formally imported to access any of its classes.
+
+                            Object, System, Math, String, StringBuffer, StringBuilder, Wrapper-Classes
+                            concept of Excpetions, concept of Threads 
+
+            java.time       is a date-time api    
+
+            java.regexp     is a regular expression utility package
+
+            java.util       Random, StringTokenizer
+                            concept of Collections     
+
+            java.util.function      Functional interfaces
+            java.util.stream        Streams API
+
+            java.io         input output streams
+            java.nio        non-blocking input output streams
+
+            java.sql        Java ddatabase connectivity
+
+        java.lang.Object
+        --------------------
+
+            this class is a implicit super-class for all java classes.
+
+            this class offers
+                int hashcode()
+                boolean equals(Object)
+                String toString()
+
+        Working with Strings
+        ------------------------
+
+            java.lang.String
+
+                Strings are immutable (non-editable).
+                Everytime we modify a string, a new string object is created. This makes
+                modifing string very costly.
+
+            java.lang.StringBuilder     is not thread-safe
+            java.lang.StringBuffer      is thread-safe
+
+                These two classes are used to manipualte or modify a string without
+                creating multiple new objects, relativly less costlier.
+
+        java.lang.System
+        -----------------
+
+            public static InputStream in;   //rerpesents the standard input stream (keyboard)
+            public static PrintWriter out;  //rerpesents the standard output stream (monitor)
+            public static PrintWriter err;  //rerpesents the standard error stream (monitor)
+
+            public static void gc();        //used to request garbbage collection
+            public static int nativeHashcode(Object); //this returns the hashcaode of an object based on its memory address.
+
+        java.lang.Math
+        ----------------
+            this class offers a list of public static methods repreenting a variety of
+            arithemtic and trignometric operations.
+
+        java.util
+        ---------------
+
+            Scanner
+                    is used scan different types of values from any InputStream.
+
+                    Scanner(InputStream)            
+                        Scanner kbin = new Scanner(System.in);
+
+                    int nextInt()
+                    flaot nextflaot()
+                    double nextDouble()
+                    String next()
+                    ....etc.,
+
+            Random
+                    is used to generate psuedo random numbers.
+
+                    Random()
+                    Random(int seed)
+
+                    int nextInt(upperLimit);    //generates a random int between zero and the givne upperLimit
+
+        Assignment#1
+
+            write a java application that generates 15 random numbers and prints them. Analyze and print
+            the min, max, sum and avg of the generted random numbers.
+
+        Wrapper-Classes, AutoBoxing and AutoUnBoxing
+        
+
+    Exception Handling
+    -------------------------------
+
 
