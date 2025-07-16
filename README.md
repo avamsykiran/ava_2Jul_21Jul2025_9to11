@@ -866,4 +866,86 @@ Java SE
     Exception Handling
     -------------------------------
 
+        Exception refers to a senario of mis-fed inputs or mis-managed operations that lead to
+        abornmal termination of the program.
+
+        Exception Handling refers to react when an exception occurs, avoiding the abnormal termination of the program.
+
+        java.lang.Throwable (i)
+                    |
+                    |<- java.lang.Error         represents a system level error like stack-overflow ...etc.,
+                    |
+                    |<- java.lang.Exception                         
+                                    |
+                                    |<- java.lang.RuntimeException
+
+        sub-Classes of Exception are called CHECKED-EXCEPTIONS
+        EXCEPTIONS are verified by the compiler wheather they are handled or not, and if not handled a compile-time
+        error is raised. It means it is compulsory to handle CHECKED-EXCEPTIONS
+
+        sub-Classes of RuntimeException are called UNCHECKED-EXCEPTIONS
+        UNCHECKED-EXCEPTIONS are not verified by the compiler wheather they are handled or not.
+        UNCHECKED-EXCEPTIONS are not supposed to be handled , but they are supposed to avoided.
+
+            class EmployeeService {
+                public double computeTotalPay(Employee emp){
+                    double tPay = emp.getBasic() + emp.getHra() + emp.getTa() - emp.getTax(); //there is a chance of NullPointerException
+                    return tPay;
+                }
+            }
+
+            class EmployeeService {
+                public double computeTotalPay(Employee emp){
+                    double tPay = 0;
+                    
+                    if(emp!=null){ //avoiding NullPointerException
+                        tPasy = emp.getBasic() + emp.getHra() + emp.getTa() - emp.getTax(); 
+                    }
+
+                    return tPay;
+                }
+            }
+
+        Hanlding Checked-Exceptions
+
+            try-catch Statement
+
+                try {
+                    //the statement that may throw an exception are written here
+                }catch(ExceptionType1 e){
+                    //the alternate code that has to execute when an exception of ExceptionType1 occurs
+                }catch(ExceptionType2 e){
+                    //the alternate code that has to execute when an exception of ExceptionType2 occurs
+                }catch(ExceptionType3 e){
+                    //the alternate code that has to execute when an exception of ExceptionType3 occurs
+                }finally {
+                    //the code that ahs to execute irrespective of an exception occuring or not is written here.
+                    //finally block is designed to close any connectiosn or stream or other closables.
+                }
+
+            try-with-resources
+
+                try(
+                    //all closables are declared here.
+                ) {
+                    //the statement that may throw an exception are written here
+                }catch(ExceptionType1 e){
+                    //the alternate code that has to execute when an exception of ExceptionType1 occurs
+                }catch(ExceptionType2 e){
+                    //the alternate code that has to execute when an exception of ExceptionType2 occurs
+                }catch(ExceptionType3 e){
+                    //the alternate code that has to execute when an exception of ExceptionType3 occurs
+                }
+
+            try-with-multiCatch
+
+                try(
+                    //all closables are declared here.
+                ) {
+                    //the statement that may throw an exception are written here
+                }catch(ExceptionType1 | ExceptionType2 | ExceptionType3 e){
+                    //the alternate code that has to execute when an exception of 
+                    // ExceptionType1 or ExceptionType2 or ExceptionType3 occurs
+                }
+
 
