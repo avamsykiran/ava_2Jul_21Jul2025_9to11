@@ -948,4 +948,13 @@ Java SE
                     // ExceptionType1 or ExceptionType2 or ExceptionType3 occurs
                 }
 
+        User Defined Exceptions
 
+            We will have to create a sub-class to Exceptiofn or RuntimeException classes to
+            create our own exceptions.
+
+            throw       is a keyword used to raise a exception programatically.
+
+                        throw new InsufficientBalanceException();
+
+            throws      is a keyword used to transfer an exception from its a method to the caller method
