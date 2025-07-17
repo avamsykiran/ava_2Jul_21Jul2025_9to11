@@ -958,3 +958,76 @@ Java SE
                         throw new InsufficientBalanceException();
 
             throws      is a keyword used to transfer an exception from its a method to the caller method
+
+    Date-Tiem Api
+    --------------------------------
+
+        java.util.Date - is depricated
+
+        java.time                       static methods
+            LocalDate               of(year,month,day)
+                                    now()
+
+            LocalTime               of(hour,min,sec)
+                                    now()
+
+            LocalDateTime           of(year,month,day,hour,min,sec)
+                                    now()
+
+            ZonedDateTime           now(zoneId)
+
+            
+            Non-Static-Methods
+                getHour(),getMinute(),getSeconds(), getDay(),........................
+                before
+                after
+                equals
+                plusHours , plusMinute, plusYears, ....
+                minusHours , minusMinute, minusYears, ....
+
+            Period.between(date1,date2)
+            Duration.between(time1,time2)
+
+            DateTimeFormatter
+
+    Generics
+    -----------------------------------
+
+        Generics also known as ADT (AbstractDataTypes) are imaginary data types
+        that are realized at the time of execution.
+
+        public class Swapper<T> {
+            public void doSwap(T a,T b){
+                T t = a;
+                a = b;
+                b = t;
+            }
+        }
+
+        Swapper<Integer> s1 = new Swapper<>();
+        s1.doSwap(10,80);
+        
+        Swapper<String> s2 = new Swapper<>();
+        s2.doSwap("Hello","Hai");
+        
+        Swapper<ComplexNumber> s3 = new Swapper<>();
+        s3.doSwap(new ComplexNumber(10,9),new ComplexNumber(9,-8));
+
+        //Genmerics do not support primitive data types, instead we use wrapper classes
+
+    Collections API
+    ----------------------------------
+
+        This is the java representation of data structures.
+
+        Data Structure      is to store data in different ways in the memory
+            |
+            ---------------------
+            |                   |
+            Linear              Non Linear
+                Arrays              Trees
+                LinkedList          Graphs
+                Queues
+                Stacks
+
+        

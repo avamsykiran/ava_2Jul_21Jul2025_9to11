@@ -14,7 +14,7 @@ public class BankingService {
 		
 		if(acc!=null) {
 			if(acc.getCurrentBalance()<amount) {
-				throw new InsufficientBalanceException();
+				throw new InsufficientBalanceException("CAn not withdraw "+amount+" as the balance is "+acc.getCurrentBalance());
 			}
 			
 			acc.setCurrentBalance(acc.getCurrentBalance()-amount);
