@@ -1020,14 +1020,76 @@ Java SE
 
         This is the java representation of data structures.
 
-        Data Structure      is to store data in different ways in the memory
-            |
-            ---------------------
-            |                   |
-            Linear              Non Linear
-                Arrays              Trees
-                LinkedList          Graphs
-                Queues
-                Stacks
+         java.util
+                |- interface Collection
+                    |           represents a generic data structure
+                    |           add(E),remove(E),contains(E),size(),isEmpty(),stream()
+                    |
+                    |<- interface Set       represents a non-linear data structure
+                    |                       does not support index, or index based operations
+                    |                       duplicate elements are not supported
+                    |                       only maximum one null element
+                    |               |
+                    |               |<- class HashSet           uses HashMap internally, and the order of retrival 
+                    |               |                           of elements is not pridictable
+                    |               |
+                    |               |<- class LinkedHashSet     uses a HashMap and a LinkedList internally
+                    |               |                           and retrives the elements in entry order
+                    |               |
+                    |               |<- class TreeSet           uses an RedBlack Binary Search Tree algorithm
+                    |               |                           and retrives the elements in natural sorted order
+                    |
+                    |<- interface List      represents a Linear data structure
+                    |                       supoort index and index based operatrions
+                    |                       get(int index),removeAt(int index),first(),last(),indexOf(e)
+                    |                       duplicate elements are allowed
+                    |                       multiple null elements are as well allowed.
+                    |               |
+                    |               |<- class Vector        is a synchronized grwable array
+                    |               |<- class ArrayList     is a non-synchronized growable array
+                    |               |<- class LinkedList    is a doublly linked list algorithm
+                    |
+                |- interface Map    represents a group of key-value pairs
+                             |      key can not repeat and cannot be null
+                             |      put(k,v),set(k,v),get(k),keySet(),containsKey(k),size(),isEmpty()    
+                             |
+                             |<- class HashMap           order of retrival of elements is not pridictable
+                             |
+                             |<- class LinkedHashMap     retrives the elements in entry order
+                             |
+                             |<- class TreeMap           retrives the elements in natural sorted order
+                        
+            class java.util.Collections     it is a utility class offering a lot of static methods each for
+                                            a particular utility operation on the collections
+
+            interface java.lang.Comparable  
+                    represents a natural sorting order.
+                    int compareTo(Object);
+
+                    class Employee implements Comparable {
+                        //fields, construcors, getters and setters ...etc
+
+                        public int compareTo(Employee e){
+                            //this is compared with e
+                            //return +ve value if this>e , -ve valeu if this<e and zero if this = e
+                        }
+                    }
+
+                    int x = e1.compareTo(e2);
+
+                    if x>0 then e1 is greater than e2
+                    if x<0 then e1 is less than e2
+                    oreelse e1 and e2 are equal
+
+            interface java.util.Comparator
+                    represents customized sorting order
+                    int compare(Object,Object)
+
+                    class EmployeeCustomeCaomparator implements Comparator {
+                        public int compare(Employee e1,Employee e2){
+                            //e1 is compared with e2
+                            //return +ve value if e1>e2 , -ve valeu if e1<e2 and zero if e1 = e2
+                        }
+                    }
 
         

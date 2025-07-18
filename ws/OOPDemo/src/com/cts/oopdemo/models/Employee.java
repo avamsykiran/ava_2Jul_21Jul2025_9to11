@@ -1,6 +1,6 @@
 package com.cts.oopdemo.models;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
 
 	private int empId;
 	private String fullName;
@@ -43,6 +43,11 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "empId=" + empId + ", fullName=" + fullName + ", salary=" + salary;
+	}
+
+	@Override
+	public int compareTo(Employee o) {
+		return ((Integer)this.empId).compareTo(o.empId);
 	}
 
 	
