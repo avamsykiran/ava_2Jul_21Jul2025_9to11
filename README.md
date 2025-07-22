@@ -1092,4 +1092,225 @@ Java SE
                         }
                     }
 
-        
+    Functional Programming
+    -------------------------------------
+
+        Functional Programming is to represent an entire job as a sequence of steps.
+
+            (a) each step is a method (function)
+            (b) the output of one function will be input for the next function in chain (sequence)
+            (c) the advantage of this approach is that any step at any time can be either added or removed.
+
+        Java achieved this through three new features
+            (1) Functional Interface
+            (2) Lambda Expression
+            (3) Streams API
+
+        A functional interface is an interface that has exactly one abstract method.
+        'java.util.function' is a built-in package that offers a list of many functional interfaces.
+
+            Consumer            that accept params but do not return
+            Supplier            that do not accpet params but returns
+            Predicate           returns a boolean
+
+        A functional interface can be implemented and instantiated using a Lambda expression.
+        A Lambda Expression is a mapping from a set of params to a return value.
+
+            params -> returnValue
+
+            public class MyBinaryOperator implements BianryOperator<Integer> {
+                public Integer apoply(Integer a,Integer b){
+                    return a+b;
+                }
+            }
+
+            BinayOperator<Integer> s = new MyBinaryOperator();
+            int ans = s.apply(90,89);
+
+            BianryOperator<Integer> s2 = (a,b) -> (a+b);
+            int result = s2.apply(9,100;)
+
+            Supplier<String> greet = () -> "Hello ";
+
+            Supplier<String> greetAsPerTime = () -> {
+                int h = LocalTime.now().getHours();
+                String greeting = "";
+
+                if(h>=3 && h<=11) greeting= "Good Morning";
+                else if(h>11 && h<=15) greeting = "Good Noon";
+                else greeting="Good Evening";
+
+                return greeting;
+            };
+
+
+        Streams API
+
+            a stream represents a flow of data from a source to a sink.
+
+            source (array/list/set...etc)
+                ↓
+                |---- ele1,ele2,ele3 ...... ------> (OPERATION-1) 
+                                                        ↓
+                                                        |---- res1,res2,res3 ...... ------> (OPERATION-2) 
+                                                                                                ↓
+                                                                                                |---- res1,res2,res3 ...... ------> |
+                                                                                                                                    ↓
+                                                                                                            (array/list/set...etc)sink
+
+            java.util.stream
+                        |- Stream
+
+                            Stream s1 = Stream.of(ele1,el2,el3,...);
+                            Stream s2 = set.stream();
+                            Stream s3 = list.stream();
+                            Stream s4 = Arrays.stream(anArray);
+
+                            forEach     accepts a 'consumer' and executes tha consuemr on each ele of the stream.
+                                        as this does not return anything, chaining another operation is not possible.
+                                        for this, this method is called a terminal.
+
+                                        int[] nums = new int[] {1,2,3,4,5,6,7,8,9};
+                                        Arrays.stream(nums).forEach( x -> { System.out.println(x); } );
+                            
+                            collect     accepts a collector and creates a new list or set ..etc with the values in a stream using
+                                        the collector. 
+
+                                        List list = stream2.collect(Collectors.toList());
+
+                                        Here as well , a stream is not returns and hence chaining is not possible, for this, this method is also called a terminal.
+
+                            reduce      accepts an identity and a  'BinaryOperator' and execute cumilativly on the 
+                                        elements of the stream and return the final reduced result.
+
+                                        int[] nums = new int[] {22,33,11};
+                                        BianryOperator<Integer> sum = (a,b) -> (a+b);
+                                        int result1 = Arrays.stream(nums).reduce(0,sum); 
+                                            // sum(sum(sum(0,22),33),11)    -----> 66
+                                                                                
+                                        int result2 = Arrays.stream(nums).reduce(1,(a,b) -> (a*b)); 
+                                            
+                                        Here as well , a stream is not returns and hence chaining is not possible, for this, this method is also called a terminal.
+                            
+                            map         accepts a 'function (functioanlInterface)' and executes it on each ele of the stream,
+                                        and returns a new stream of all those results.
+
+                                        int[] nums = new int[] {1,2,3,4,5};
+                                        Arrays.stream(nums)
+                                            .map( a -> a*a )
+                                            .forEach( x -> { System.out.println(x); } );    // 1,4,9,16,25
+
+                                        'map' returns a stream nd hence it can be chained with another operation, thus it is called intermidiate.
+
+                            filter      accepts a 'predicate' and executes the predicate on each ele of the stream,
+                                        and it returns a new stream of those ele that get true on the predicate.
+                                        
+                                        int[] nums = new int[] {1,2,3,4,5,6,7,8,9};
+                                        Arrays.stream(nums)
+                                            .filter( n -> n%2==0 )
+                                            .forEach( x -> { System.out.println(x); } );    // 2,4,6,8
+                                        
+                                        Arrays.stream(nums)
+                                            .filter( n -> n%2!=0 )
+                                            .forEach( x -> { System.out.println(x); } );    // 1,3,5,7,9
+
+                                        'filter' returns a stream and hence it can be chained with another operation, thus it is called intermidiate.
+
+                            Chaining in action
+
+                                Arrays.stream(nums)
+                                    .filter( n -> n%2==0 )
+                                    .map( a -> a*a )
+                                    .forEach( x -> { System.out.println(x); } );    // 4,16,36,64
+                                
+        Method References
+
+            A functional interface can be assigned with a method of any class or any object provided
+            that the method signature matches with the abstract method of the functional interface
+
+            @FunctionalInterface
+            interface Dummy {
+                void doThat(Object obj);
+            }
+
+            Dummy d = System.out::println;
+            d.doThat("Hello World");
+
+            int[] nums = new int[] {1,2,3,4,5,6,7,8,9};
+            //Arrays.stream(nums).forEach( x -> { System.out.println(x); } );
+            Arrays.stream(nums).forEach(System.out::println);
+
+    JDBC - Java Database Connectivity
+    ---------------------------------------
+
+        RDBMS   <--DRIVER/JDBC--> JavaApp
+
+        Driver is the implementation of Jdbc Specifications.
+
+        JDBC Specification is a pakcage of interfaces called java.sql . Driver will contain
+        classes that implement these interfaces. Driver for each RDBMS is different from one another as the
+        RDBMS product itself is different.
+
+        RDBMS           Driver
+        Oracle          Thin Driver
+        MySQL           ConnectorJ Driver
+        Ms SQL Server   MS Jet Driver
+        ...etc.,
+
+        Oracle          <--Oracle Thin Driver---> 
+        MySQL           <--ConnectorJ Driver---->  JDBC <------->  JavaApp
+        MsSQLServer     <--Ms Jet Driver--------> 
+
+        java.sql
+            DriverManager           is to load the relavent driver and is used to create a connection
+            Connection              is used to create a Statement or a Prepared Statement
+            Statement               is used to execute any SQL query but does not support query parameters
+            PreparedStateemnt       is used to execute any SQL query and supports query parameters
+            ResultSet               is returned when a 'select' query is executed and contians the results of the 'select' qyr.
+            SQLException
+
+            Connection con = DriverManager.getConnection(DbUrl,dbUserName,dbPwd);
+
+            Statement st = con.createStatement();
+                boolean isDone = st.execute(ddlQry); //CREATE/ALTER/DROP
+                int rowsEffected = st.executeUpdate(dmlQry); //INSERT/UPDATE/DELETE
+                ResultSet results = st.executeQuery(seelectQry);
+
+            PreparedStatement pst1 = con.prepareStatement(ddlQry); //CREATE/ALTER/DROP with qry params
+            boolean isDone = pst1.execute();
+
+            PreparedStatement pst2 = con.prepareStatement(dmlQry); //INSERT/UPDATE/DELETE with qry params
+            int rowsEffected = pst2.executeUpdate();
+
+            PreparedStatement pst3 = con.prepareStatement(selectQry); //with qry params
+            ResultSet results = pst3.executeQuery();
+
+        Mven Dependency
+
+            H2DB
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <version>2.2.224</version> <!-- Use a recent version -->
+                </dependency>
+
+                dbURL -> jdbc:h2:~/testdb
+                dbURL -> jdbc:h2:mem:testdb
+
+            MySQL
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>8.0.33</version>
+                </dependency>
+
+                dbURL -> jdbc:mysql://localhost:3306/<database_name> 
+
+            Oracle
+                <dependency>
+                    <groupId>com.oracle.jdbc</groupId>
+                    <artifactId>ojdbc14</artifactId>
+                    <version>10.2.0.4</version>
+                </dependency>
+
+                dbURL -> jdbc:oracle:thin:@//<host>:<port>/<service_name>
