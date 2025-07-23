@@ -1314,3 +1314,42 @@ Java SE
                 </dependency>
 
                 dbURL -> jdbc:oracle:thin:@//<host>:<port>/<service_name>
+
+    Multi - Threading
+    ------------------------------------------
+
+        Thread is a asynchrnous stub of a program that executes parellel to the main program.
+        
+        Time Of Excution:   0min     10min   20min   30min   40min
+        Synchronous:        Job1, Job2, Job3 .....
+        Asynchronous:       Job1 ....
+                            Job2 ..
+                            Job3 .....
+
+        Each java app is a thread by default.
+
+        java.lang.Runnable      void run()
+                    |
+                    |<- java.lang.Thread
+                                    Thread();
+                                    Thread(name);
+                                    Thread(name,runnable);
+
+                                    void start()
+                                    static void sleep(duration);
+                                    String getName();
+                                    void setName(String name);
+                                    int getPriority();
+                                    void setPriority(int);
+                                    static Thread currentThread(); 
+
+        new Thread()
+            ↓
+            [ Initiated ]   --- start()-----> [ Ready.../ Queued... ] --- When the CPU and other resources are available --|
+                                                        ↑                                                                  |
+                                                        |                                                                  ↓
+                                                   [Paused..] <---------sleep(duration)--------------------------- [ Running ..] 
+                                                                                                                        |
+                                                                                                                        | done
+                                                                                                                        ↓
+                                                                                                                    [ Termination ]
