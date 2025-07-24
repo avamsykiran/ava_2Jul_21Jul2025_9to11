@@ -1353,3 +1353,10 @@ Java SE
                                                                                                                         | done
                                                                                                                         ↓
                                                                                                                     [ Termination ]
+
+        
+    Java 8 to 17 Features
+    ---------------------------------------------------------------------
+
+        https://medium.com/@vijayaneraye/important-features-java-9-java-10-java-11-java-12-java13-java-14-java-15-java-16-java-17-650420ee7337
+
